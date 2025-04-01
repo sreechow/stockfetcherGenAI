@@ -25,18 +25,22 @@ def create_file(client, file_path):
     print("file id", result.id)
     return result.id
 
-def create_vector_store(file_path):
-    # Replace with your own file path or URL
-    file_id = create_file(client, file_path)
+def upload_and_create_vector_store(file_path):
+    try:
+        # Replace with your own file path or URL
+        file_id = create_file(client, file_path)
 
-    # Create a vector store
-    vector_store = client.vector_stores.create(name="stock_projections_base") #name can be anything
-    print(vector_store.id)
+        # Create a vector store
+        vector_store = client.vector_stores.create(name="stock_projections_base") #name can be anything
+        print(vector_store.id)
 
-    # Add file to the vector store
-    result = client.vector_stores.files.create(
-        vector_store_id=vector_store.id,
-        file_id=file_id
-    )
-    print(result)
-    return result
+        # Add file to the vector store
+        result = client.vector_stores.files.create(
+            vector_store_id=vector_store.id,
+            file_id=file_id
+        )
+        print(result)
+        return result
+    except Exception as e:
+        print(e)
+        return str(e)

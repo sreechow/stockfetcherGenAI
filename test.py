@@ -31,4 +31,10 @@ def test_post_endpoint():
     # Add more assertions to check response data
 
 
-test_getstocks()
+def test_upload_vectors():
+    data = {"file_path": "https://s201.q4cdn.com/141608511/files/doc_financials/2024/ar/NVIDIA-2024-Annual-Report.pdf"}
+    response = requests.post("http://127.0.0.1:5000/stocks/create_vector_store", json=data)
+    assert response.status_code == 201  # Or 200, depending on your API
+
+
+test_upload_vectors()

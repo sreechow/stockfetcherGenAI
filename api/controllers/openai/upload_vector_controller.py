@@ -40,7 +40,12 @@ def upload_and_create_vector_store(file_path):
             file_id=file_id
         )
         print(result)
-        return result
+        # Return a dictionary with relevant details
+        return {
+            "vector_store_id": vector_store.id,
+            "file_id": file_id,
+            "result": result.to_dict()  # Assuming `result` has a `to_dict` method
+        }
     except Exception as e:
         print(e)
-        return str(e)
+        return {"error": str(e)}
